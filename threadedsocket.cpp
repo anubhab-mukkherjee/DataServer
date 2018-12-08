@@ -2,6 +2,8 @@
 #include <QTcpSocket>
 #include <QTextStream>
 #include <datahandler.h>
+#include <QCryptographicHash>
+
 ThreadedSocket::ThreadedSocket(qintptr handle, QObject *parent)
     :QThread (parent), m_descriptor(handle) , user("")
 {
@@ -52,10 +54,21 @@ void ThreadedSocket::onReadyRead()
     QStringList list = string.split(" ");
     if(list[0]=="connect")
     {
-        if(DataHandler::instance()->loginuser(list[1],list[2]))
+        if(DataHandler::instance()->loginuser(list[1],QString("%1").arg
+                                                  (
+                                                  QString
+                                                      (
+                                                      QCryptographicHash::hash(
+                                                          list[2].trimmed().toUtf8(),
+                                                          QCryptographicHash::Sha1)
+                                                      .toHex()
+                                                      )
+                                                  )
+                                              )
+                )
         {
             user = list[1];
-            password = list[2];
+            password = QString("%1").arg(QString(QCryptographicHash::hash(list[2].trimmed().toUtf8(),QCryptographicHash::Sha1).toHex()));
             pool<<"1";
         }
         else

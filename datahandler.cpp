@@ -26,10 +26,15 @@ bool DataHandler::loginuser(QString username, QString password)
 {
     if(!jsonObject.contains(username))
     {
+        QTextStream(stdout) << "User not found";
         return false;
     }
-    if(jsonObject[username].toObject()["pass"].toString()!=password.trimmed())
+    if(jsonObject[username].toObject()["pass"].toString().toLower() !=password.toLower())
     {
+        QTextStream(stdout)
+                << jsonObject[username].toObject()["pass"].toString()
+                << '\n'
+                << password;
         return false;
     }
     return true;
