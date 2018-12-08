@@ -1,10 +1,10 @@
 # DataServer
 A simple NoSQL  database
 
-##Prerequisites
+## Prerequisites
 To install the software, you need [the Qt framework](https://qt.io) installed on your system. Qt Creator is helpful for debugging and further development.
 
-##Built With
+## Built With
 * [C++](https://isocpp.org/) - Programming language used
 ```
 C++ is a general-purpose programming language. It has imperative, object-oriented and generic programming features, while also providing facilities for low-level memory manipulation.
