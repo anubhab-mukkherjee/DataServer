@@ -6,13 +6,14 @@
 #include <QVector>
 
 QScopedPointer<DataHandler> DataHandler::s_instance(nullptr);
+QString DataHandler::filePath("");
 
 DataHandler::DataHandler()
     :  QObject(nullptr)
 {
-    updateData("../data.json");
+    updateData(filePath);
     QFileSystemWatcher* watcher = new QFileSystemWatcher(this);
-    watcher->addPath("../data.json");
+    watcher->addPath(filePath);
     connect(watcher,&QFileSystemWatcher::fileChanged,this,&DataHandler::updateData);
 }
 
@@ -39,6 +40,13 @@ DataHandler *DataHandler::instance()
     if(s_instance==nullptr)
         s_instance.reset(new DataHandler);
     return s_instance.data();
+}
+
+void DataHandler::setFile(QString filePath)
+{
+    if(!QFile::exists(filePath))
+        throw std::runtime_error(("could not open file " + filePath).toStdString());
+    DataHandler::filePath = filePath;
 }
 
 
@@ -90,7 +98,7 @@ void DataHandler::setObject(QString path, QString data, QString user)
     }
     jsonObject.insert(user,v[0]);
 
-    QFile file("../data.json");
+    QFile file(filePath);
     file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate);
     file.write(QJsonDocument(jsonObject).toJson());
     file.close();

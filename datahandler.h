@@ -9,6 +9,7 @@ class DataHandler :public QObject
     Q_OBJECT
     static QScopedPointer<DataHandler> s_instance;
     DataHandler();
+    static QString filePath;
 
 public:
     QString getDesc();
@@ -16,6 +17,7 @@ public:
     QString getObject(QString path,QString user);
     void setObject(QString path,QString data,QString user);
     static DataHandler *instance();
+    static void setFile(QString filePath);
     virtual ~DataHandler(){}
 
 private:
