@@ -1,0 +1,23 @@
+{
+    "desc": "This a simple databse project.\r\nAnd I don't know why I am working on this.",
+    "phoenix": {
+        "data": {
+            "hello": "qwerty",
+            "world": {
+                "Hello": "hi",
+                "qwerty": "key"
+            }
+        },
+        "pass": "blah"
+    },
+    "zero": {
+        "data": {
+            "hello": "world",
+            "foo": {
+                "day": "bar",
+                "lopus": "ipsum"
+            }
+        },
+        "pass": "dimp"
+    }
+}
