@@ -33,4 +33,4 @@ Refer to [JSON Wikipedia](https://en.wikipedia.org/wiki/JSON) for more informati
 
 ## License
 
-This project is licensed under the **GNU GENERAL PUBLIC** License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the **GNU GENERAL PUBLIC** License - see the [LICENSE.md](LICENSE) file for details
